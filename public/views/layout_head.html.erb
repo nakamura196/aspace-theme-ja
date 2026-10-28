@@ -366,14 +366,17 @@
     line-height: 1.8;
   }
   .record-type-badge i, .record-type-badge .fa { color: inherit !important; }
-  .identifier {
+  /* 本体の .badge-and-identifier .identifier（padding .25rem）に負けないよう同じ強さで書く */
+  .badge-and-identifier .identifier, .identifier {
     font-size: .85rem;
     color: var(--c-muted);
-    padding: .1rem .6rem;
+    padding: .1rem .8rem;
+    line-height: 1.6;
     border: 1px solid var(--c-line);
     border-radius: var(--c-radius-pill);
     background: var(--c-surface);
   }
+  .identifier .id-label { font-weight: 400; }
   .identifier .component { color: var(--c-text); font-weight: 500; font-variant-numeric: tabular-nums; }
 
   /* 引用・閲覧申込み・PDF：大きなアイコンの箱をやめ、横並びの小さなボタンに */
@@ -695,6 +698,8 @@
   /* 並び替えとページ送り */
   .sorter, #sort_form { gap: .5rem; }
   .pagination { gap: 4px; flex-wrap: wrap; }
+  /* 件名・人物のページでは一覧の見出しと 1 件目に上下が密着していた（本体の margin が 0） */
+  #paging { margin: 1rem 0; }
   .pagination .page-link {
     border: 1px solid var(--c-line) !important;
     border-radius: var(--c-radius-sm) !important;
