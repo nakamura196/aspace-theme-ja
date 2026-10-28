@@ -1,10 +1,12 @@
 # aspace-theme-ja
 
 ArchivesSpace の公開画面（PUI）のための、日本語向けの見た目のプラグインです。
-ほぼ CSS だけで動きます。画面の HTML（ERB）は、トップの入口のカードを差し込むところだけです。
+ほぼ CSS だけで動きます。画面の HTML（ERB）に手を入れるのは、トップの入口のカードと、検索欄の 2 か所だけです。
+本体のひな形をまるごと上書きしているのは検索欄（`shared/_search.html.erb`）だけです。
 
 - 淡いグレーの地に白いカード、上端に固定される 1 段のヘッダー
 - 大きな検索欄、絞り込みはチップ
+- トップとリポジトリの画面では、詳しい検索条件を最初は畳んでおく
 - 資料の項目は「項目名｜値」の 2 段組
 - 資料の木は広めにとり、深い階層でも名前を折り返して全部見せる
 - トップに入口のカード
@@ -95,9 +97,24 @@ ja:
 キーは `heading`（カード群の見出し）と、`desc.` に続く `repository` `resource` `digital_object` `accession` `subject` `pui_agent` `classification` です。
 訳の変更は、ArchivesSpace を再起動すると反映されます。
 
+## 検索欄（詳しい条件の折りたたみ）
+
+トップとリポジトリの画面では、最初はキーワードの欄と検索ボタンだけを出します。
+「詳しい条件」を押すと、種別・項目・年代などの条件が開きます。
+すでに条件が入っているときは、開いた状態で出します。
+検索結果の画面の「検索を絞り込む」の中では畳みません。
+
+このために、本体の `public/app/views/shared/_search.html.erb`（v4.2.1）を写して `public/views/shared/_search.html.erb` に置き、書き換えています。
+**ArchivesSpace 本体を上げたときは、新しい版のこのファイルを写し直して、同じ変更を当て直してください。**
+本体の検索欄の変更が、このプラグインを入れている間は反映されないためです。
+
+ボタンの文言は `ja_theme.search.more`（詳しい条件 / More options）で、ほかと同じく後ろのプラグインの locales で変えられます。
+このファイルの変更は、ArchivesSpace を再起動すると反映されます。
+
 ## English
 
-A theme for the ArchivesSpace Public User Interface, designed for Japanese-language sites. It is mostly CSS, plus entry cards on the home page.
+A theme for the ArchivesSpace Public User Interface, designed for Japanese-language sites. It is mostly CSS, plus entry cards on the home page and a collapsible search form.
+The only core template it overrides is the search form (`shared/_search.html.erb`, copied from v4.2.1). On the home and repository pages the advanced fields start collapsed behind a "More options" button (`ja_theme.search.more`) and open automatically when a search is already filtered. When you upgrade ArchivesSpace, re-copy that file from the new version and re-apply the changes.
 Clone it into `plugins/ja_theme` and add `ja_theme` to `AppConfig[:plugins]`.
 To customise colours or fonts, create another plugin whose `public/views/layout_head.html.erb` overrides the `--c-*` CSS variables in `:root`, and list it after `ja_theme`.
 The home-page entry cards use the `_welcome_addition.html.erb` hook and are built from the main menu; override their descriptions (`ja_theme.welcome.desc.*`) in a later plugin's `public/locales/*.yml`.

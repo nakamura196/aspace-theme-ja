@@ -1,5 +1,7 @@
 ja:
   ja_theme:
+    search:
+      more: 詳しい条件
     welcome:
       heading: 入口から探す
       desc:

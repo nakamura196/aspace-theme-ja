@@ -1,5 +1,7 @@
 en:
   ja_theme:
+    search:
+      more: More options
     welcome:
       heading: Start exploring
       desc:
