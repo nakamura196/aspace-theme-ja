@@ -10,6 +10,8 @@
       文字    --c-font
       色      --c-accent / --c-accent-dark / --c-accent-light / --c-accent-soft / --c-accent-line（差し色の濃淡）
               --c-on-accent（差し色の上の文字）、--c-focus-ring（入力欄のフォーカスの輪）
+              --c-accent-fill / --c-accent-fill-hover（白い文字を載せる面。主ボタン・今のページ番号。
+                差し色が明るく白い文字との差が 4.5 に届かないときは、ここだけ濃い色にする）
               --c-hero-top / --c-hero-glow（トップの帯のグラデーション）
               --c-text / --c-sub / --c-muted / --c-placeholder / --c-disabled（文字の濃淡）
               --c-bg / --c-surface / --c-soft / --c-segment-bg / --c-segment-hover / --c-header-bg（面）
@@ -29,13 +31,15 @@
     --c-accent-soft: #eaf0f6;
     --c-accent-line: #c5d3e2;
     --c-on-accent: #fff;
+    --c-accent-fill: var(--c-accent);
+    --c-accent-fill-hover: var(--c-accent-dark);
     --c-focus-ring: 0 0 0 3px rgba(43, 90, 138, .18);
     --c-hero-top: #edf2f7;
     --c-hero-glow: rgba(43, 90, 138, .12);
     /* 文字の濃淡 */
     --c-text: #1f2a33;
     --c-sub: #4a5763;
-    --c-muted: #6b7782;
+    --c-muted: #626e79; /* 地 #f4f6f8 の上で 4.82（#6b7782 は 4.23 で AA に届かなかった） */
     --c-placeholder: #8b96a0;
     --c-disabled: #a3adb6;
     /* 面と罫線 */
@@ -226,15 +230,15 @@
     transition: background .15s, border-color .15s, color .15s, box-shadow .15s;
   }
   body .btn-primary, body .btn-primary:not(:disabled):not(.disabled):active {
-    background: var(--c-accent) !important;
-    border-color: var(--c-accent) !important;
+    background: var(--c-accent-fill) !important;
+    border-color: var(--c-accent-fill) !important;
     color: var(--c-on-accent) !important;
     padding: .5rem 1.25rem;
     box-shadow: var(--c-shadow);
   }
   body .btn-primary:hover, body .btn-primary:focus {
-    background: var(--c-accent-dark) !important;
-    border-color: var(--c-accent-dark) !important;
+    background: var(--c-accent-fill-hover) !important;
+    border-color: var(--c-accent-fill-hover) !important;
   }
   .btn-default, .btn-light, .btn-secondary, .btn--default {
     background: var(--c-surface) !important;
@@ -743,8 +747,8 @@
   }
   .pagination .page-link:hover { background: var(--c-accent-soft); color: var(--c-accent-dark); }
   .pagination .active .page-link, .pagination .page-item.active .page-link {
-    background: var(--c-accent) !important;
-    border-color: var(--c-accent) !important;
+    background: var(--c-accent-fill) !important;
+    border-color: var(--c-accent-fill) !important;
     color: var(--c-on-accent);
   }
 

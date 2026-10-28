@@ -53,9 +53,14 @@ plugins/my_theme/public/views/layout_head.html.erb
     --c-focus-ring: 0 0 0 3px rgba(34, 146, 202, .18);
     --c-hero-top: #eaf4fa;
     --c-hero-glow: rgba(34, 146, 202, .14);
+    --c-accent-fill: #17709d;
+    --c-accent-fill-hover: #125a7e;
   }
 </style>
 ```
+
+主ボタンと今のページ番号は、白い文字を `--c-accent-fill` の上に載せます（既定は `--c-accent`）。
+差し色が明るく、白い文字との差が 4.5（WCAG AA）に届かないときは、この例のように `--c-accent-fill` だけ濃い色にしてください。
 
 ```ruby
 AppConfig[:plugins] = ['local', 'ja_theme', 'my_theme']
@@ -68,7 +73,7 @@ Web フォントを使いたいときも、同じファイルに `<link>` を足
 | 種類 | 変数 |
 |---|---|
 | 文字 | `--c-font` |
-| 差し色 | `--c-accent` `--c-accent-dark` `--c-accent-light` `--c-accent-soft` `--c-accent-line` `--c-on-accent` `--c-focus-ring` |
+| 差し色 | `--c-accent` `--c-accent-dark` `--c-accent-light` `--c-accent-soft` `--c-accent-line` `--c-on-accent` `--c-accent-fill` `--c-accent-fill-hover` `--c-focus-ring` |
 | トップの帯 | `--c-hero-top` `--c-hero-glow` |
 | 文字の濃淡 | `--c-text` `--c-sub` `--c-muted` `--c-placeholder` `--c-disabled` |
 | 面 | `--c-bg` `--c-surface` `--c-soft` `--c-segment-bg` `--c-segment-hover` `--c-header-bg` |
@@ -117,6 +122,7 @@ A theme for the ArchivesSpace Public User Interface, designed for Japanese-langu
 The only core template it overrides is the search form (`shared/_search.html.erb`, copied from v4.2.1). On the home and repository pages the advanced fields start collapsed behind a "More options" button (`ja_theme.search.more`) and open automatically when a search is already filtered. When you upgrade ArchivesSpace, re-copy that file from the new version and re-apply the changes.
 Clone it into `plugins/ja_theme` and add `ja_theme` to `AppConfig[:plugins]`.
 To customise colours or fonts, create another plugin whose `public/views/layout_head.html.erb` overrides the `--c-*` CSS variables in `:root`, and list it after `ja_theme`.
+Primary buttons and the current page number put white text on `--c-accent-fill` (defaults to `--c-accent`). If your accent colour is too light for white text (below 4.5:1, WCAG AA), set only `--c-accent-fill` and `--c-accent-fill-hover` to a darker shade.
 The home-page entry cards use the `_welcome_addition.html.erb` hook and are built from the main menu; override their descriptions (`ja_theme.welcome.desc.*`) in a later plugin's `public/locales/*.yml`.
 The collection tree is wider, uses a 12px indent per level, and wraps long titles instead of truncating them.
 Tested with ArchivesSpace v4.2.1.
