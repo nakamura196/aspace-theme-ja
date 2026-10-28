@@ -1,11 +1,13 @@
 # aspace-theme-ja
 
 ArchivesSpace の公開画面（PUI）のための、日本語向けの見た目のプラグインです。
-CSS だけで動き、画面の HTML（ERB）は書き換えません。
+ほぼ CSS だけで動きます。画面の HTML（ERB）は、トップの入口のカードを差し込むところだけです。
 
 - 淡いグレーの地に白いカード、上端に固定される 1 段のヘッダー
 - 大きな検索欄、絞り込みはチップ
 - 資料の項目は「項目名｜値」の 2 段組
+- 資料の木は広めにとり、深い階層でも名前を折り返して全部見せる
+- トップに入口のカード
 - 外部のサーバーから文字を読み込みません（端末に入っている日本語の文字を使います）
 
 ArchivesSpace v4.2.1 で確認しています。
@@ -99,6 +101,7 @@ A theme for the ArchivesSpace Public User Interface, designed for Japanese-langu
 Clone it into `plugins/ja_theme` and add `ja_theme` to `AppConfig[:plugins]`.
 To customise colours or fonts, create another plugin whose `public/views/layout_head.html.erb` overrides the `--c-*` CSS variables in `:root`, and list it after `ja_theme`.
 The home-page entry cards use the `_welcome_addition.html.erb` hook and are built from the main menu; override their descriptions (`ja_theme.welcome.desc.*`) in a later plugin's `public/locales/*.yml`.
+The collection tree is wider, uses a 12px indent per level, and wraps long titles instead of truncating them.
 Tested with ArchivesSpace v4.2.1.
 
 ## ライセンス

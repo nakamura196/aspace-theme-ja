@@ -61,7 +61,7 @@
     --c-shadow-pop: 0 10px 20px rgba(16, 32, 48, .08);
     --c-shadow-modal: 0 20px 50px rgba(16, 32, 48, .25);
     /* 幅 */
-    --c-max: 1240px;
+    --c-max: 1800px;
   }
 
   /* ───────── 全体 ───────── */
@@ -491,6 +491,30 @@
   }
   .infinite-tree-view .current a, .infinite-tree-view [aria-current] a { color: var(--c-accent-dark); font-weight: 700; }
   .resizable-sidebar-handle, .resizable-sidebar .handle { opacity: .35; }
+  /* 木の幅と字下げ。深い階層でも資料名が読めるように、
+     木を広げ、1 段の字下げを 12px に詰め、名前は「…」で切らずに折り返す。
+     字下げの部品を左に浮かせ、名前の折り返しを字下げの位置にそろえる。 */
+  @media (min-width: 992px) {
+    .row > .infinite-tree-sidebar { flex: 0 0 clamp(320px, 28%, 440px); max-width: none; }
+  }
+  #tree-container .table-cell.title { white-space: normal !important; text-overflow: clip !important; }
+  #tree-container .table-cell.title > .indentor { float: left; }
+  #tree-container .table-cell.title > a.record-title { display: block; overflow: hidden; }
+  #tree-container .indent-level-1 .indentor { width: 24px !important; }
+  #tree-container .indent-level-2 .indentor { width: 36px !important; }
+  #tree-container .indent-level-3 .indentor { width: 48px !important; }
+  #tree-container .indent-level-4 .indentor { width: 60px !important; }
+  #tree-container .indent-level-5 .indentor { width: 72px !important; }
+  #tree-container .indent-level-6 .indentor { width: 84px !important; }
+  #tree-container .indent-level-7 .indentor { width: 96px !important; }
+  #tree-container .indent-level-8 .indentor { width: 108px !important; }
+  #tree-container .indent-level-9 .indentor { width: 120px !important; }
+  #tree-container .indent-level-10 .indentor { width: 132px !important; }
+  #tree-container .indent-level-11 .indentor { width: 144px !important; }
+  #tree-container .indent-level-12 .indentor { width: 156px !important; }
+  #tree-container .indent-level-13 .indentor { width: 168px !important; }
+  #tree-container .indent-level-14 .indentor { width: 180px !important; }
+  #tree-container .indent-level-15 .indentor { width: 192px !important; }
 
   /* ───────── 資料ページ：項目を「項目名｜値」の 2 段組に ───────── */
   .resizable-content-pane, #notes_row > [class*="col-lg-9"] { min-width: 0; }
