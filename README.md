@@ -73,11 +73,32 @@ Web フォントを使いたいときも、同じファイルに `<link>` を足
 | 影 | `--c-shadow` `--c-shadow-hover` `--c-shadow-pop` `--c-shadow-modal` |
 | 幅 | `--c-max` |
 
+## トップの入口のカード
+
+トップの検索欄の下に、メニューと同じ入口（リポジトリ・コレクション・デジタル資料など）をカードで並べます。
+本体のトップ画面が用意している差し込み口 `public/views/_welcome_addition.html.erb` を使うので、トップ画面のひな形そのものは上書きしません。
+`AppConfig[:pui_hide]` でメニューから隠した入口は、カードにも出ません。
+
+カードの見出しは本体の訳を使います。説明文はこのプラグインの `public/locales/ja.yml`・`en.yml` にあります。
+説明文を館ごとに変えるときは、後ろに並べたプラグインの `public/locales/ja.yml` に、変えたいものだけを書きます。
+
+```yaml
+ja:
+  ja_theme:
+    welcome:
+      desc:
+        subject: 写真の主題や撮影地から探す
+```
+
+キーは `heading`（カード群の見出し）と、`desc.` に続く `repository` `resource` `digital_object` `accession` `subject` `pui_agent` `classification` です。
+訳の変更は、ArchivesSpace を再起動すると反映されます。
+
 ## English
 
-A CSS-only theme for the ArchivesSpace Public User Interface, designed for Japanese-language sites.
+A theme for the ArchivesSpace Public User Interface, designed for Japanese-language sites. It is mostly CSS, plus entry cards on the home page.
 Clone it into `plugins/ja_theme` and add `ja_theme` to `AppConfig[:plugins]`.
 To customise colours or fonts, create another plugin whose `public/views/layout_head.html.erb` overrides the `--c-*` CSS variables in `:root`, and list it after `ja_theme`.
+The home-page entry cards use the `_welcome_addition.html.erb` hook and are built from the main menu; override their descriptions (`ja_theme.welcome.desc.*`) in a later plugin's `public/locales/*.yml`.
 Tested with ArchivesSpace v4.2.1.
 
 ## ライセンス
