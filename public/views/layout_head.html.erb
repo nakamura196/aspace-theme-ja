@@ -519,6 +519,36 @@
   #tree-container .indent-level-14 .indentor { width: 180px !important; }
   #tree-container .indent-level-15 .indentor { width: 192px !important; }
 
+  /* ───────── 「コレクションの編成」：右に並ぶ資料の板 ───────── */
+  .infinite-item {
+    background: var(--c-surface);
+    border: 1px solid var(--c-line);
+    border-radius: var(--c-radius);
+    padding: 1rem 1.25rem !important;
+    margin-bottom: .75rem;
+  }
+  .infinite-item > .information { padding-top: 0 !important; }
+  .infinite-item dl.administrative_notes { margin: .5rem 0 0; }
+  .infinite-item dl.administrative_notes > div { padding-left: 0; padding-right: 0; }
+  /* 左の木：名前を「…」で切らずに折り返す。資料が少ないとき下に灰色の空き地を残さない */
+  #infinite-tree-container { height: auto; max-height: 600px; background: transparent; border: 0; }
+  .infinite-tree .node-body { height: auto; min-height: 2rem; line-height: 1.5; padding: .3rem .5rem .3rem 0; }
+  .infinite-tree .root.node > .node-row > .node-body { padding-left: .5rem; }
+  .infinite-tree .node-title-container { overflow: visible; }
+  .infinite-tree .node-title { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
+  /* スマホ幅では木と資料を縦に積む（本体は折り返さない指定で、横に 2 倍の幅になる） */
+  @media (max-width: 991.98px) {
+    .row.has-resizable-content { flex-wrap: wrap; margin-left: 0; margin-right: 0; row-gap: 1rem; }
+    .row.has-resizable-content > .resizable-content-pane { flex: 0 0 100%; max-width: 100%; padding-left: 0; padding-right: 0; }
+    #infinite-tree-container { max-height: 50vh; }
+  }
+  @media (max-width: 575.98px) {
+    .infinite-item { padding: .875rem 1rem !important; }
+    .infinite-item dl.administrative_notes > div { grid-template-columns: minmax(0, 1fr); row-gap: .15rem; }
+    .infinite-item dl.administrative_notes dt { grid-area: auto; }
+    .infinite-item dl.administrative_notes dd { grid-column: auto; }
+  }
+
   /* ───────── 資料ページ：項目を「項目名｜値」の 2 段組に ───────── */
   .resizable-content-pane, #notes_row > [class*="col-lg-9"] { min-width: 0; }
   .upper-record-details {
