@@ -171,9 +171,12 @@
     #header .site-title { white-space: normal; font-size: .95rem; }
     #navigation .navbar { position: static; }
     #navigation .navbar-toggler { margin: 0 !important; }
-    #navigation .navbar-collapse {
+    /* 開いたメニューは .top-bar も持つので、上の transparent !important に負けないよう同じ強さで白にする */
+    #navigation .navbar-collapse,
+    #navigation .navbar-collapse.top-bar {
       position: absolute; left: 0; right: 0; top: 100%;
-      background: var(--c-surface);
+      z-index: 1;
+      background: var(--c-surface) !important;
       border-bottom: 1px solid var(--c-line);
       box-shadow: var(--c-shadow-pop);
       padding: .5rem 1rem 1rem !important;
